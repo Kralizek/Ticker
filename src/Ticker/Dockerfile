@@ -9,7 +9,7 @@ WORKDIR "/build/src/Ticker"
 RUN dotnet build "Ticker.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Ticker.csproj" -c Release -o /app/publish -r linux-x64
+RUN dotnet publish "Ticker.csproj" --configuration Release --output /app/publish --runtime linux-x64 --self-contained false -p:PublishReadyToRun=true
 
 FROM base AS final
 WORKDIR /var/task
